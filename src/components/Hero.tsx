@@ -2,10 +2,9 @@ import { Coffee, MapPin, Sparkles } from "lucide-react";
 
 interface HeroProps {
   onExploreMenu: () => void;
-  onVisitStore: () => void;
 }
 
-export default function Hero({ onExploreMenu, onVisitStore }: HeroProps) {
+export default function Hero({ onExploreMenu }: HeroProps) {
   return (
     <section
       id="home"
@@ -57,13 +56,13 @@ export default function Hero({ onExploreMenu, onVisitStore }: HeroProps) {
               <Coffee className="h-4 w-4" />
               Explore Menu
             </button>
-            <button
-              onClick={onVisitStore}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-8 py-3.5 text-sm font-semibold text-cream-100 transition hover:border-amber-500/50 hover:bg-white/10 active:scale-95 sm:w-auto"
+            <a
+              href="#visit-us"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10 active:scale-95 sm:w-auto"
             >
-              <MapPin className="h-4 w-4 text-amber-400" />
+              <MapPin className="h-4 w-4 text-amber-500" />
               Visit Store
-            </button>
+            </a>
           </div>
 
           {/* Stats strip */}

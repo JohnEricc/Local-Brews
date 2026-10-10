@@ -1,4 +1,4 @@
-import { Clock, Coffee, Facebook, Instagram, MapPin, Phone, Twitter, Youtube } from "lucide-react";
+import { Clock, Coffee, Facebook, Instagram, MapPin, Phone } from "lucide-react";
 import { categories, storeInfo } from "../data/menu";
 
 interface FooterProps {
@@ -7,10 +7,8 @@ interface FooterProps {
 }
 
 const socialLinks = [
-  { icon: Facebook, label: "Facebook", href: storeInfo.social.facebook },
-  { icon: Instagram, label: "Instagram", href: storeInfo.social.instagram },
-  { icon: Twitter, label: "TikTok", href: storeInfo.social.tiktok },
-  { icon: Youtube, label: "YouTube", href: "https://youtube.com/@lokalbrewsbinan" },
+  { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/Localbrew2022/" },
+  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/localbrew_main/" },
 ];
 
 export default function Footer({ onNavigate, onCategorySelect }: FooterProps) {
@@ -104,7 +102,7 @@ export default function Footer({ onNavigate, onCategorySelect }: FooterProps) {
           </nav>
 
           {/* Visit us */}
-          <div>
+          <div id="visit-us" className="scroll-mt-28">
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-cream-100/40">
               Visit us
             </h3>

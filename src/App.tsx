@@ -25,7 +25,6 @@ export default function App() {
   }, []);
 
   const goMenu = useCallback(() => navigateTo("menu"), [navigateTo]);
-  const goAbout = useCallback(() => navigateTo("about"), [navigateTo]);
 
   // Memoize composed sections' props so a keystroke in the top search
   // does not force Navbar → Hero → About → Footer to re-render.
@@ -44,7 +43,7 @@ export default function App() {
     <div className="min-h-screen bg-coffee-950 text-cream-100">
       <Navbar {...navbarProps} />
       <main>
-        <Hero onExploreMenu={goMenu} onVisitStore={goAbout} />
+        <Hero onExploreMenu={goMenu} />
         <MenuSection
           search={search}
           onSearchChange={handleSearchChange}
