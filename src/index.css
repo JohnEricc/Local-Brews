@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    @apply bg-coffee-950 text-cream-100 font-body antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+  }
+
+  ::selection {
+    @apply bg-amber-500/30 text-white;
+  }
+
+  /* Eliminate the mobile 300ms tap delay on interactive elements */
+  button,
+  a,
+  select,
+  input,
+  summary {
+    touch-action: manipulation;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* GPU-only transitions — never animate layout properties */
+  .transition-transform-colors {
+    transition-property: transform, opacity, color, background-color,
+      border-color, box-shadow, --tw-ring-color, --tw-ring-opacity,
+      --tw-ring-offset-shadow;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+
+  /* Hide scrollbars while keeping scrollability (category rails) */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* =========================================================================
+   Cross-platform performance & anti-lag rules
+   ========================================================================= */
+
+/* 1. Touch / mobile: disable heavy hover interactions on non-hover
+   devices. This prevents repaints triggered by simulated ":hover" on tap. */
+@media (hover: none) and (pointer: coarse) {
+  .group:hover .group-hover\:scale-105 {
+    transform: none;
+  }
+
+  .group:hover\:-translate-y-1,
+  .hover\:-translate-y-1 {
+    transform: none;
+  }
+
+  .hover\:scale-105,
+  .hover\:scale-100 {
+    transform: none;
+  }
+
+  /* Disable "active" transform micro-feedback animation if it causes
+     missed taps on low-end devices. Keep subtle only for fine pointers. */
+  .active\:scale-95,
+  .active\:scale-\[0\.96\],
+  .active\:scale-\[0\.98\] {
+    transform: none;
+  }
+
+  /* Drop hover-only color transitions; keep instant to avoid repaint work. */
+  .hover\:bg-amber-500,
+  .hover\:bg-amber-400,
+  .hover\:border-amber-500\/50,
+  .hover\:text-amber-400 {
+    transition: none;
+  }
+}
+
+/* 2. Low-end GPU hint: promote animated elements to their own layer,
+   but scope narrowly to avoid excess memory. */
+.will-change-transform {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* 3. Custom scrollbar (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2e2e2e;
+    border-radius: 999px;
+    border: 2px solid #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d99f3e;
+  }
+}
+
+/* 4. Respect users who prefer less motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
