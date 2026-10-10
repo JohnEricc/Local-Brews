@@ -156,95 +156,100 @@ export default function MenuSection({
         </div>
 
         {/* Controls */}
-        <div className="mt-8 flex items-center gap-3">
-          <div className="no-scrollbar -mx-4 flex w-full items-center gap-2 overflow-x-auto px-4 py-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 lg:w-auto">
-            {categories.map((cat) => (
-              <button
-                key={cat.key}
-                onClick={() => updateCategory(cat.key)}
-                className={cn(
-                  "shrink-0 touch-manipulation whitespace-nowrap rounded-full border px-4 text-xs font-semibold transition-transform-colors min-h-[44px]",
-                  activeCategory === cat.key
-                    ? "border-amber-500 bg-amber-500 text-coffee-950"
-                    : "border-white/10 bg-white/5 text-cream-100/70 hover:border-amber-500/40 hover:text-cream-100"
-                )}
-                aria-pressed={activeCategory === cat.key}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="ml-auto flex items-center gap-2">
-            <div className="relative">
-              <label htmlFor="sort-select" className="sr-only">
-                Sort menu by
-              </label>
-              <ArrowDownWideNarrow className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-cream-100/50" />
-              <select
-                id="sort-select"
-                value={sort}
-                onChange={(e) => handleSortChange(e.target.value)}
-                className="appearance-none min-h-[44px] rounded-full border border-white/10 bg-coffee-800 py-2.5 pl-9 pr-9 text-xs font-semibold text-cream-100 outline-none transition-transform-colors focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/20"
-              >
-                {sortOptions.map((opt) => (
-                  <option key={opt.key} value={opt.key} className="bg-coffee-800">
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
-              <SlidersHorizontal className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-cream-100/40" />
+        <div className="mt-8">
+          {/* Row 1: Category pills — full-width scrollable on mobile */}
+          <div className="sm:flex sm:items-center sm:gap-3">
+            <div className="no-scrollbar -mx-4 flex w-full items-center gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
+              {categories.map((cat) => (
+                <button
+                  key={cat.key}
+                  onClick={() => updateCategory(cat.key)}
+                  className={cn(
+                    "shrink-0 touch-manipulation whitespace-nowrap rounded-full border px-4 text-xs font-semibold transition-transform-colors min-h-[44px]",
+                    activeCategory === cat.key
+                      ? "border-amber-500 bg-amber-500 text-coffee-950"
+                      : "border-white/10 bg-white/5 text-cream-100/70 hover:border-amber-500/40 hover:text-cream-100"
+                  )}
+                  aria-pressed={activeCategory === cat.key}
+                >
+                  {cat.label}
+                </button>
+              ))}
             </div>
 
-            <div
-              className="flex items-center rounded-full border border-white/10 bg-coffee-800 p-1"
-              role="group"
-              aria-label="Toggle view"
-            >
-              <button
-                onClick={handleSetGridView}
-                aria-label="Instaview grid"
-                aria-pressed={view === "grid"}
-                className={cn(
-                  "flex h-11 w-11 items-center justify-center rounded-full transition-transform-colors",
-                  view === "grid"
-                    ? "bg-amber-500 text-coffee-950"
-                    : "text-cream-100/60 hover:text-cream-100"
-                )}
+            {/* Row 2: Sort & view controls */}
+            <div className="flex w-full items-center justify-between gap-3 sm:w-auto">
+              <div className="relative">
+                <label htmlFor="sort-select" className="sr-only">
+                  Sort menu by
+                </label>
+                <ArrowDownWideNarrow className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-cream-100/50" />
+                <select
+                  id="sort-select"
+                  value={sort}
+                  onChange={(e) => handleSortChange(e.target.value)}
+                  className="appearance-none min-h-[44px] rounded-full border border-white/10 bg-coffee-800 py-2.5 pl-9 pr-9 text-xs font-semibold text-cream-100 outline-none transition-transform-colors focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/20"
+                >
+                  {sortOptions.map((opt) => (
+                    <option key={opt.key} value={opt.key} className="bg-coffee-800">
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+                <SlidersHorizontal className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-cream-100/40" />
+              </div>
+
+              <div
+                className="flex items-center rounded-full border border-white/10 bg-coffee-800 p-1"
+                role="group"
+                aria-label="Toggle view"
               >
-                <Grid2X2 className="h-4 w-4" />
-              </button>
-              <button
-                onClick={handleSetListView}
-                aria-label="List view"
-                aria-pressed={view === "list"}
-                className={cn(
-                  "flex h-11 w-11 items-center justify-center rounded-full transition-transform-colors",
-                  view === "list"
-                    ? "bg-amber-500 text-coffee-950"
-                    : "text-cream-100/60 hover:text-cream-100"
-                )}
-              >
-                <List className="h-4 w-4" />
-              </button>
+                <button
+                  onClick={handleSetGridView}
+                  aria-label="Instaview grid"
+                  aria-pressed={view === "grid"}
+                  className={cn(
+                    "flex h-11 w-11 items-center justify-center rounded-full transition-transform-colors",
+                    view === "grid"
+                      ? "bg-amber-500 text-coffee-950"
+                      : "text-cream-100/60 hover:text-cream-100"
+                  )}
+                >
+                  <Grid2X2 className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={handleSetListView}
+                  aria-label="List view"
+                  aria-pressed={view === "list"}
+                  className={cn(
+                    "flex h-11 w-11 items-center justify-center rounded-full transition-transform-colors",
+                    view === "list"
+                      ? "bg-amber-500 text-coffee-950"
+                      : "text-cream-100/60 hover:text-cream-100"
+                  )}
+                >
+                  <List className="h-4 w-4" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Mobile search within menu */}
-        <div className="relative mt-4 md:hidden">
-          <label htmlFor="menu-search" className="sr-only">
-            Search the menu
-          </label>
-          <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-cream-100/40" />
-          <input
-            id="menu-search"
-            type="search"
-            value={search}
-            onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search our menu…"
-            className="w-full min-h-[44px] rounded-full bg-white/5 border border-white/10 px-4 pl-10 py-3 text-sm text-cream-100 placeholder:text-cream-100/40 outline-none transition-transform-colors focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/20"
-          />
+          {/* Row 3: Search bar — mobile only */}
+          <div className="relative mt-3 md:hidden">
+            <label htmlFor="menu-search" className="sr-only">
+              Search the menu
+            </label>
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-cream-100/40" />
+            <input
+              id="menu-search"
+              type="search"
+              value={search}
+              onChange={(e) => onSearchChange(e.target.value)}
+              placeholder="Search our menu…"
+              style={{ fontSize: "16px" }}
+              className="w-full min-h-[44px] rounded-full bg-white/5 border border-white/10 px-4 pl-10 py-3 text-base sm:text-sm text-cream-100 placeholder:text-cream-100/40 outline-none transition-transform-colors focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/20"
+            />
+          </div>
         </div>
 
         <div className="mt-6 flex items-center gap-2 text-xs text-cream-100/45">
